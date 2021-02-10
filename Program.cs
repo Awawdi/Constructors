@@ -2,9 +2,29 @@ using System;
 
 namespace Constructors
 {
-    public class Car
+    public interface IMotor
     {
-        public Car() {}
+        int getFuel();
+    }
+
+    public class Car : IMotor
+    {
+        private int fuel = 100;
+
+        public int getFuel()
+        {
+            return this.fuel;
+        }
+
+        public int addFuel(int amount)
+        {
+            this.fuel += amount;
+            return this.fuel;
+        }
+
+        public Car()
+        {}
+
         public Car(string carName)
         {
             Console.WriteLine("Car constructor called");
@@ -39,7 +59,10 @@ namespace Constructors
     }
     public class Nissan : Car
     {
-        Nissan() { }
+        Nissan() 
+        { 
+            
+        }
         public Nissan(string carName) 
         {
             Console.WriteLine("Nissan constructor called");
@@ -66,6 +89,7 @@ namespace Constructors
         {
             Console.WriteLine("Mazda constructor called");
             Name = carName;
+            addFuel(50);
         }
 
         public override void Drive()
@@ -81,14 +105,17 @@ namespace Constructors
             Car GM = new Car("GM");
             Console.WriteLine(GM.Name);
             GM.Drive(); //Base class Drive
+            Console.WriteLine("Car fuel level = "+ GM.getFuel());
 
             Mazda Lantis = new Mazda("Lantis");
             Console.WriteLine(Lantis.Name);
             Lantis.Drive(); //Drive with polymorphism
+            Console.WriteLine("Car fuel level = "+ Lantis.getFuel());
 
             Hynadi Tuscon = new Hynadi("Tuscon");
             Console.WriteLine(Tuscon.Name);
             Tuscon.Drive(); //Drive without polymorphism
+            Console.WriteLine("Car fuel level = "+ Tuscon.getFuel());
 
             Nissan Almera = new Nissan("Almera","999");
             Console.WriteLine(Almera.Name + " - " + Almera.Number);
